@@ -19,11 +19,18 @@ const Form = () => {
     } else if (!formValues.name) {
       setFormErrors("ERROR: Please provide a name.");
       setMessage("");
+    } else if (formValues.password.length < 6) {
+      setFormErrors("ERROR: password must be more that 6 characters.");
+      setMessage("");
+    } else if (!formValues.email.includes("@") || !formValues.email.includes(".")) {
+      setFormErrors("ERROR: provide a valid email");
+      setMessage("");
     } else {
       setMessage("Form submitted successfully!");
       setFormErrors("");
     }
   };
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
