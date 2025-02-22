@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-const Name = () => {
-  const [name, setName] = useState("");
-  const handleNameChange = (e) => setName(e.target.value);
+const Name = ({ value, onChange }) => {
   return (
     <>
       <label>
@@ -12,8 +10,8 @@ const Name = () => {
           name="name"
           style={{ padding: 10, marginTop: 10 }}
           placeholder="Enter your name"
-          value={name}
-          onChange={handleNameChange}
+          value={value}
+          onChange={onChange}
         ></input>
       </label>
     </>

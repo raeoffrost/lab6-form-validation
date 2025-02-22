@@ -13,14 +13,22 @@ const Form = () => {
   const handleSubmit = (e) => {
     // prevent default submit
     e.preventDefault();
-    if (formValues == initialValues) {
-      setFormErrors("ERROR: Please fill all form inputs.");
+    if (!formValues.email) {
+      setFormErrors("ERROR: Please provide an email.");
+      setMessage("");
+    } else if (!formValues.name) {
+      setFormErrors("ERROR: Please provide a name.");
+      setMessage("");
     } else {
       setMessage("Form submitted successfully!");
       setFormErrors("");
     }
   };
-
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormValues((values) => ({ ...values, [name]: value }));
+  };
   const formStyle = {
     padding: "20px",
     font: "inherit",
@@ -46,14 +54,11 @@ const Form = () => {
   return (
     <>
       <form onSubmit={handleSubmit} style={formStyle}>
-        <Name onChange={(e) => setFormValues(e.target.value.Name)} className={styles.form} />
+        <Name value={formValues.name} onChange={handleChange} className={styles.form} />
         <br />
-        <Email onChange={(e) => setFormValues(e.target.value.Email)} className={styles.form} />
+        <Email value={formValues.email} onChange={handleChange} className={styles.form} />
         <br />
-        <Password
-          onChange={(e) => setFormValues(e.target.value.Password)}
-          className={styles.form}
-        />
+        <Password onChange={handleChange} className={styles.form} />
         <br />
         <button type="submit" style={btnStyle}>
           Submit
